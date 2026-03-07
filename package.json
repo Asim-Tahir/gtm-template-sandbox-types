@@ -1,0 +1,30 @@
+{
+  "name": "gtm-template-sandbox-types",
+  "version": "0.0.1-alpha.1",
+  "description": "Typescript types for Google Tag Manager sandbox javascript for web and test scenarios",
+  "type": "commonjs",
+  "files": [
+    "types"
+  ],
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "require": null,
+      "import": null,
+      "default": null
+    },
+    "./web": {
+      "types": "./types/web.d.ts",
+      "require": null,
+      "import": null,
+      "default": null
+    },
+    "./test": {
+      "types": "./types/test.d.ts",
+      "require": null,
+      "import": null,
+      "default": null
+    }
+  }
+}

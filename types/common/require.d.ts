@@ -1,0 +1,60 @@
+// #region Require
+export type RequireName =
+  | "addConsentListener"
+  | "addEventCallback"
+  | "aliasInWindow"
+  | "callInWindow"
+  | "callLater"
+  | "copyFromDataLayer"
+  | "copyFromWindow"
+  | "createArgumentsQueue"
+  | "createQueue"
+  | "decodeUri"
+  | "decodeUriComponent"
+  | "encodeUri"
+  | "encodeUriComponent"
+  | "fromBase64"
+  | "generateRandom"
+  | "getContainerVersion"
+  | "getCookieValues"
+  | "getQueryParameters"
+  | "getReferrerQueryParameters"
+  | "getReferrerUrl"
+  | "getTimestamp"
+  | "getTimestampMillis"
+  | "getType"
+  | "getUrl"
+  | "gtagSet"
+  | "injectHiddenIframe"
+  | "injectScript"
+  | "isConsentGranted"
+  | "JSON"
+  | "localStorage"
+  | "logToConsole"
+  | "makeInteger"
+  | "makeNumber"
+  | "makeString"
+  | "makeTableMap"
+  | "Math"
+  | "Object"
+  | "parseUrl"
+  | "queryPermission"
+  | "readAnalyticsStorage"
+  | "readCharacterSet"
+  | "readTitle"
+  | "sendPixel"
+  | "setCookie"
+  | "setDefaultConsentState"
+  | "setInWindow"
+  | "sha256"
+  | "templateStorage"
+  | "toBase64"
+  | "updateConsentState";
+
+/**
+ * Imports a built-in function by name. Returns a **function** or an **object**
+ * that can be called from your program. Returns **undefined** when the browser
+ * does not support the built-in function.
+ */
+export declare function require(name: RequireName): any | undefined;
+// #endregion
