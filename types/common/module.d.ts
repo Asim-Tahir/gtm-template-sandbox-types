@@ -8,7 +8,7 @@ declare module "addConsentListener" {
     /**
      * When a listener is invoked, it will be passed the consent type that is
      * being changed and the new value of that consent type:
-     * 
+     *
      * @param consentType The consent type that is being changed.
      * @param granted A boolean which is true if the specified consent type is
      * being changed to granted.
@@ -26,18 +26,18 @@ declare module "addConsentListener" {
    * be called if an unset consent type is updated to granted. Listener
    * functions will be in charge of ensuring their code runs the appropriate
    * number of times.
-   * 
+   *
    * @example
    * ```js
    * const isConsentGranted = require('isConsentGranted');
    * const addConsentListener = require('addConsentListener');
-   * 
+   *
    * if (!isConsentGranted('ad_storage')) {
    *   let wasCalled = false;
    *   addConsentListener('ad_storage', (consentType, granted) => {
    *     if (wasCalled) return;
    *     wasCalled = true;
-   * 
+   *
    *     const cookies = getMyCookies();
    *     sendFullPixel(cookies);
    *   });
@@ -95,7 +95,7 @@ declare module "addEventCallback" {
      * @param containerId The id of the container that invokes the function
      * @param eventData Object containing information about the event
      */
-    callback: (containerId: string, eventData: EventData) => void
+    callback: (containerId: string, eventData: EventData) => void,
   ): void;
 
   export = addEventCallback;
@@ -108,13 +108,13 @@ declare module "aliasInWindow" {
    * require aliasing. Assigns the value in the `window` object found at the
    * `fromPath` to the key in the `window` object at the `toPath`. Returns
    * `true` if successful, `false` otherwise.
-   * 
+   *
    * @param toPath A dot-separated path into the `window` object where a value
    * should be copied to. All components in the path up to the last component
    * must already exist in the `window` object.
    * @param fromPath A dot-separated path into `window` to the value to copy.
    * If the value does not exist, the operation will fail.
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_globals `access_globals`}
    */
   function aliasInWindow(toPath: string, fromPath: string): boolean;
@@ -148,10 +148,10 @@ declare module "callLater" {
    * Schedules a call to a function to occur asynchronously. The function will
    * be called after the current code returns. This is equivalent to
    * `setTimeout(<function>, 0)`.
-   * 
+   *
    * @param callback The function to call.
    */
-  function callLater(callback: Function): void
+  function callLater(callback: Function): void;
 
   export = callLater;
 }
@@ -161,14 +161,14 @@ declare module "copyFromDataLayer" {
    * Returns the value currently assigned to the given key in the data layer:
    * The value found at the given key if it's a primitive type, function,
    * or object literal, or `undefined` otherwise.
-   * 
+   *
    * @param key The key in the format of "a.b.c".
    * @param dataLayerVersion The optional {@link https://support.google.com/tagmanager/answer/6106899#DataLayer data layer version}.
    * The default value is 2. It is strongly discouraged to use the value 1.
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#read_data_layer `read_data_layer`}
    */
-  function copyFromDataLayer(key: string, dataLayerVersion?: number): any
+  function copyFromDataLayer(key: string, dataLayerVersion?: number): any;
 
   export = copyFromDataLayer;
 }
@@ -182,10 +182,10 @@ declare module "copyFromWindow" {
    * `function`. Returns the fetched (and coerced) value.
    *
    * @param key The key in the `window` to copy the value of.
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_globals `access_globals`}
    */
-  function copyFromWindow(key: string): any
+  function copyFromWindow(key: string): any;
 
   export = copyFromWindow;
 }
@@ -225,7 +225,7 @@ declare module "createArgumentsQueue" {
    *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_globals `access_globals`}
    */
-  function createArgumentsQueue(fnKey: string, arrayKey: string): any
+  function createArgumentsQueue(fnKey: string, arrayKey: string): any;
 
   export = createArgumentsQueue;
 }
@@ -246,7 +246,7 @@ declare module "createQueue" {
    *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_globals `access_globals`}
    */
-  function createQueue(arrayKey: string): any
+  function createQueue(arrayKey: string): any;
 
   export = createQueue;
 }
@@ -293,14 +293,14 @@ declare module "decodeUriComponent" {
    *   // ...
    * }
    * ```
-   * 
+   *
    * @param encoded_uri_component A URI component that has been encoded by
    * [`encodeUriComponent()`](https://developers.google.com/tag-platform/tag-manager/templates/api#encodeuricomponent)
    * or by other means.
    *
    * @permission None
    */
-  function decodeUriComponent(encoded_uri_component: string): string | undefined
+  function decodeUriComponent(encoded_uri_component: string): string | undefined;
 
   export = decodeUriComponent;
 }
@@ -311,17 +311,17 @@ declare module "encodeUri" {
    * characters. Returns a **string** that represents the provided string encoded
    * as a URI. Returns `undefined` when provided with invalid input
    * (a lone surrogate).
-   * 
+   *
    * @example
    * ```js
    * const sendPixel = require('sendPixel');
    * const encodeUri = require('encodeUri');
-   * 
+   *
    * sendPixel('https://www.example.com/' + encodeUri(pathInput));
    * ```
    *
    * @param uri A complete URI.
-   * 
+   *
    * @permission None
    */
   function encodeUri(uri: string): string;
@@ -340,7 +340,7 @@ declare module "encodeUriComponent" {
    * ```js
    * const sendPixel = require('sendPixel');
    * const encodeUriComponent = require('encodeUriComponent');
-   * 
+   *
    * sendPixel('https://www.example.com/?' + encodeUriComponent(queryInput));
    * ```
    *
@@ -357,7 +357,7 @@ declare module "fromBase64" {
   /**
    * The `fromBase64` API lets you to decode strings from their base64
    * representation. Returns `undefined` when provided with invalid input.
-   * 
+   *
    * @example
    * ```js
    * const fromBase64 = require('fromBase64');
@@ -405,7 +405,7 @@ declare module "getContainerVersion" {
    *    version: string,
    * }
    * ```
-   * 
+   *
    * @example
    * ```js
    * const getContainerVersion = require('getContainerVersion');
@@ -426,10 +426,10 @@ declare module "getContainerVersion" {
    * }
    *
    * ```
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#read_container_data `read_container_data`}
    */
-  function getContainerVersion(): any
+  function getContainerVersion(): any;
 
   export = getContainerVersion;
 }
@@ -454,16 +454,16 @@ declare module "getQueryParameters" {
    * Returns the first or all of the parameters for the current URL's `queryKey`.
    * Returns the first value from the `queryKey` or an Array of values from the
    * `queryKey`.
-   * 
+   *
    * For example, if the current URL is `https://example.com/path?var=foo&var1=foo1&var=foo2&var=foo`, then:
    * - `getQueryParameters('var') == 'foo'`
    * - `getQueryParameters('var', false) == 'foo'`
    * - `getQueryParameters('var', null) == 'foo'`
    * - `getQueryParameters('var', true) == ['foo', 'foo2', 'foo']`
-   * 
+   *
    * @param queryKey The key to read from the query parameters.
    * @param retrieveAll 	Whether to retrieve all the values.
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#get_url `get_url`}
    * must allow the `query` component, and must specify the `queryKey` in the
    * allowed query keys (or allow any query key.)
@@ -480,7 +480,7 @@ declare module "getReferrerQueryParameters" {
    * URL. Returns the first or all of the parameters for the given referrer's
    * `queryKey`. Returns the first value from the `queryKey` or an Array of
    * values from the `queryKey`.
-   * 
+   *
    * @param queryKey The key to read from the query parameters.
    * @param retrieveAll Whether to retrieve all the values.
    *
@@ -488,7 +488,7 @@ declare module "getReferrerQueryParameters" {
    * ```js
    * // If the referrer URL is `https://example.com/path?var=foo&var1=foo1&var=foo2&var=foo`, then:
    * const getReferrerQueryParameters = require('getReferrerQueryParameters');
-   * 
+   *
    * getReferrerQueryParameters('var') == 'foo'
    * getReferrerQueryParameters('var', false) == 'foo'
    * getReferrerQueryParameters('var', null) == 'foo'
@@ -499,7 +499,10 @@ declare module "getReferrerQueryParameters" {
    * must allow the `query` component, and must specify the `queryKey` in the
    * allowed query keys (or allow any query key.)
    */
-  function getReferrerQueryParameters(queryKey: string, retrieveAll?: boolean): string | string[] | undefined;
+  function getReferrerQueryParameters(
+    queryKey: string,
+    retrieveAll?: boolean,
+  ): string | string[] | undefined;
 
   export = getReferrerQueryParameters;
 }
@@ -517,7 +520,9 @@ declare module "getReferrerUrl" {
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#get_referrer `get_referrer`}
    * must allow the `query` component, and must specify the `queryKey` in the allowed query keys (or allow any query key.)
    */
-  function getReferrerUrl(component?: "protocol" | "host" | "port" | "path" | "query" | "extension" | undefined | null): string;
+  function getReferrerUrl(
+    component?: "protocol" | "host" | "port" | "path" | "query" | "extension" | undefined | null,
+  ): string;
 
   export = getReferrerUrl;
 }
@@ -555,7 +560,15 @@ declare module "getType" {
   /**
    * Possible return values from getType function
    */
-  type TypeString = 'undefined' | 'null' | 'boolean' | 'number' | 'string' | 'object' | 'array' | 'function';
+  type TypeString =
+    | "undefined"
+    | "null"
+    | "boolean"
+    | "number"
+    | "string"
+    | "object"
+    | "array"
+    | "function";
 
   /**
    * Returns a **string** describing the given value's type. Unlike `typeof`,
@@ -564,7 +577,7 @@ declare module "getType" {
    * @example
    * ```js
    * const getType = require('getType');
-   * 
+   *
    * getType(undefined) // 'undefined'
    * getType(null) // 'null'
    * getType(true) // 'boolean'
@@ -577,14 +590,14 @@ declare module "getType" {
    *
    * @permission None
    */
-  function getType(value: undefined): 'undefined';
-  function getType(value: null): 'null';
-  function getType(value: boolean): 'boolean';
-  function getType(value: number): 'number';
-  function getType(value: string): 'string';
-  function getType<T>(value: T[]): 'array';
-  function getType(value: Function): 'function';
-  function getType(value: object): 'object' | 'array' | 'function';
+  function getType(value: undefined): "undefined";
+  function getType(value: null): "null";
+  function getType(value: boolean): "boolean";
+  function getType(value: number): "number";
+  function getType(value: string): "string";
+  function getType<T>(value: T[]): "array";
+  function getType(value: Function): "function";
+  function getType(value: object): "object" | "array" | "function";
   function getType(value: any): TypeString;
 
   export = getType;
@@ -602,7 +615,18 @@ declare module "getUrl" {
    *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#get_url `get_url`}
    */
-  function getUrl(component: "protocol" | "host" | "port" | "path" | "query" | "extension" | "fragment" | undefined | null): string;
+  function getUrl(
+    component:
+      | "protocol"
+      | "host"
+      | "port"
+      | "path"
+      | "query"
+      | "extension"
+      | "fragment"
+      | undefined
+      | null,
+  ): string;
 
   export = getUrl;
 }
@@ -628,7 +652,7 @@ declare module "gtagSet" {
    * @example
    * ```js
    * const gtagSet = require('gtagSet');
-   * 
+   *
    * gtagSet({
    *   'ads_data_redaction': true,
    *   'url_passthrough': true,
@@ -687,13 +711,25 @@ declare module "injectScript" {
    *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#inject_script `inject_script`}
    */
-  function injectScript(url: string, onSuccess: Function, onFailure: Function, cacheToken?: string): void;
+  function injectScript(
+    url: string,
+    onSuccess: Function,
+    onFailure: Function,
+    cacheToken?: string,
+  ): void;
 
   export = injectScript;
 }
 
 declare module "isConsentGranted" {
-  type ConsentType = 'ad_storage' | 'analytics_storage' | 'functionality_storage' | 'personalization_storage' | 'security_storage' | 'ad_user_data' | 'ad_personalization';
+  type ConsentType =
+    | "ad_storage"
+    | "analytics_storage"
+    | "functionality_storage"
+    | "personalization_storage"
+    | "security_storage"
+    | "ad_user_data"
+    | "ad_personalization";
 
   /**
    * Returns true if the specified consent type is granted.
@@ -710,7 +746,7 @@ declare module "isConsentGranted" {
    * @example
    * ```js
    * const isConsentGranted = require('isConsentGranted');
-   * 
+   *
    * if (isConsentGranted('ad_storage')) {
    *   sendFullPixel();
    * } else {
@@ -742,7 +778,7 @@ declare module "JSON" {
    * @example
    * ```js
    * const JSON = require('JSON');
-   * 
+   *
    * const object = JSON.parse('{"foo":"bar"}');
    * ```
    */
@@ -760,7 +796,7 @@ declare module "JSON" {
    * @example
    * ```js
    * const JSON = require('JSON');
-   * 
+   *
    * const str = JSON.stringify({foo: 'bar'});
    * ```
    */
@@ -771,24 +807,24 @@ declare module "JSON" {
 
 /**
  * Returns an object with methods for accessing local storage.
- * 
+ *
  * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_local_storage `access_local_storage`}
  */
 declare module "localStorage" {
   /**
-  * The **`getItem()`** method of local storage, when passed a key
-  * name, will return that key's value, or `null` if the key does not exist,
-  * in local storage.
-  *
-  * @param key The key name to retrieve.
-  *
+   * The **`getItem()`** method of local storage, when passed a key
+   * name, will return that key's value, or `null` if the key does not exist,
+   * in local storage.
+   *
+   * @param key The key name to retrieve.
+   *
    * @example
    * ```js
    * const localStorage = require('localStorage');
-   * 
+   *
    * const persistedMyKey = localStorage.getItem('myKey');
    * ```
-   * 
+   *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#access_local_storage `access_local_storage`}
    *
    * Requires read access for {@link key the key}. Returns null if {@link key the key} does not exist.
@@ -796,12 +832,12 @@ declare module "localStorage" {
   function getItem(key: string): string | null;
 
   /**
-    * The **`setItem()`** method of local storage, when passed a key
-    * name and value, will add that key to local storage, or update
-    * that key's value if it already exists.
-    *
-    * @param key The key name to set.
-    * @param value The value to store.
+   * The **`setItem()`** method of local storage, when passed a key
+   * name and value, will add that key to local storage, or update
+   * that key's value if it already exists.
+   *
+   * @param key The key name to set.
+   * @param value The value to store.
    *
    * @example
    * ```js
@@ -817,10 +853,10 @@ declare module "localStorage" {
   function setItem(key: string, value: string): void;
 
   /**
-    * The **`removeItem()`** method of local storage, when passed a key
-    * name, will remove that key from local storage if it exists.
-    *
-    * @param key The key name to remove.
+   * The **`removeItem()`** method of local storage, when passed a key
+   * name, will remove that key from local storage if it exists.
+   *
+   * @param key The key name to remove.
    *
    * @example
    * ```js
@@ -861,7 +897,7 @@ declare module "logToConsole" {
 declare module "makeInteger" {
   /**
    * Converts the given value to a **number** (integer).
-   * 
+   *
    * @param value The value to convert.
    *
    * @permission None
@@ -874,7 +910,7 @@ declare module "makeInteger" {
 declare module "makeNumber" {
   /**
    * Converts the given value to a **number**.
-   * 
+   *
    * @param value The value to convert.
    *
    * @permission None
@@ -887,7 +923,7 @@ declare module "makeNumber" {
 declare module "makeString" {
   /**
    * Returns the given value as a **string**.
-   * 
+   *
    * @param value The value to convert.
    *
    * @permission None
@@ -917,13 +953,17 @@ declare module "makeTableMap" {
    * @example
    * ```js
    * const makeTableMap = require('makeTableMap');
-   * 
+   *
    * makeTableMap([{'key': 'k1', 'value': 'v1'}, {'key': 'k2', 'value': 'v2'}]) == {'k1': 'v1', 'k2': 'v2'};
-   * 
+   *
    * makeTableMap([{'col1': 'k1', 'col2': 'v1'}, {'col1': 'k2', 'col2': 'v2'}], 'col1', 'col2') == {'k1': 'v1', 'k2': 'v2'};
    * ```
    */
-  function makeTableMap(tableObj: Array<Record<string, any>>, keyColumnName: string, valueColumnName: string): Record<string, any>;
+  function makeTableMap(
+    tableObj: Array<Record<string, any>>,
+    keyColumnName: string,
+    valueColumnName: string,
+  ): Record<string, any>;
 
   export = makeTableMap;
 }
@@ -1017,7 +1057,7 @@ declare module "Math" {
    *
    * @param x The base value of the expression.
    * @param y The exponent value of the expression.
-   * 
+   *
    * @example
    * ```js
    * const Math = require('Math');
@@ -1195,18 +1235,18 @@ declare module "Object" {
 
 declare module "parseUrl" {
   interface ParsedUrl {
-    href: string,
-    origin: string,
-    protocol: string,
-    username: string,
-    password: string,
-    host: string,
-    hostname: string,
-    port: string,
-    pathname: string,
-    search: string,
-    searchParams: Record<string, string | Array<string>>,
-    hash: string,
+    href: string;
+    origin: string;
+    protocol: string;
+    username: string;
+    password: string;
+    host: string;
+    hostname: string;
+    port: string;
+    pathname: string;
+    search: string;
+    searchParams: Record<string, string | Array<string>>;
+    hash: string;
   }
 
   /**
@@ -1241,7 +1281,7 @@ declare module "queryPermission" {
    * @param functionArgs Function arguments vary based on the permission being
    * queried. See **Function Arguments** below.
    * @returns a **boolean**: `true` if a permission is granted, `false` otherwise.
-   * 
+   *
    * **Function Arguments**
    * - `sendPixel`, `injectScript`, `injectHiddenIframe`: The second parameter
    * should be a URL string.
@@ -1279,7 +1319,10 @@ declare module "queryPermission" {
   function queryPermission(permission: "writeGlobals", key: string): boolean;
   function queryPermission(permission: "readGlobals", key: string): boolean;
 
-  function queryPermission(permission: "readUrl", component?: "protocol" | "host" | "port" | "path" | "query" | "extension" | "fragment"): boolean;
+  function queryPermission(
+    permission: "readUrl",
+    component?: "protocol" | "host" | "port" | "path" | "query" | "extension" | "fragment",
+  ): boolean;
   function queryPermission(permission: "readUrl", component: "query", queryKey: string): boolean;
 
   function queryPermission(permission: string, ...functionArgs: Array<string>): boolean;
@@ -1434,7 +1477,7 @@ declare module "setCookie" {
     /**
      * set by `options['max-age']`, if present.
      */
-    'max-age'?: number;
+    "max-age"?: number;
     /**
      * set by `options['expires']`, if present. If present, this must be
      * a UTC-formatted date string. `Date.toUTCString()` can be used to format
@@ -1448,7 +1491,7 @@ declare module "setCookie" {
     /**
      * set by `options['samesite']`, if present.
      */
-    samesite?: 'strict' | 'lax' | 'none';
+    samesite?: "strict" | "lax" | "none";
   }
 
   /**
@@ -1463,7 +1506,12 @@ declare module "setCookie" {
    *
    * @permission {@link https://developers.google.com/tag-platform/tag-manager/templates/permissions#set_cookies `set_cookies`}
    */
-  function setCookie(name: string, value: string, options?: SetCookieOptions, encode?: boolean): void;
+  function setCookie(
+    name: string,
+    value: string,
+    options?: SetCookieOptions,
+    encode?: boolean,
+  ): void;
 
   export = setCookie;
 }
@@ -1600,7 +1648,7 @@ declare module "sha256" {
    *   sendPixel('https://example.com/collect?id=' + digest);
    *   data.gtmOnSuccess();
    * }, data.gtmOnFailure);
-   * 
+   *
    * sha256('inputString', (digest) => {
    *   sendPixel('https://example.com/collect?id=' + digest);
    *   data.gtmOnSuccess();
@@ -1609,7 +1657,12 @@ declare module "sha256" {
    *
    * @permission None
    */
-  function sha256(input: string, onSuccess: Function, onFailure?: Function, options?: Options): string;
+  function sha256(
+    input: string,
+    onSuccess: Function,
+    onFailure?: Function,
+    options?: Options,
+  ): string;
 
   export = sha256;
 }
@@ -1649,7 +1702,7 @@ declare module "sha256" {
  */
 declare module "templateStorage" {
   /**
-   * 
+   *
    *
    * @example
    * ```js
@@ -1662,8 +1715,8 @@ declare module "templateStorage" {
 
   // TODO:  fullfill docs
   /**
-   * 
-   * 
+   *
+   *
    * @example
    * ```js
    * const templateStorage = require("templateStorage");
@@ -1675,7 +1728,7 @@ declare module "templateStorage" {
 
   // TODO:  fullfill docs
   /**
-   * 
+   *
    *
    * @example
    * ```js
@@ -1782,7 +1835,7 @@ declare module "updateConsentState" {
    * @example
    * ```js
    * const updateConsentState = require("updateConsentState");
-   * 
+   *
    * updateConsentState({
    *   "ad_storage": "granted",
    *   "analytics_storage": "denied",
@@ -1797,5 +1850,3 @@ declare module "updateConsentState" {
 
   export = updateConsentState;
 }
-
-export {};
