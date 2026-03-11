@@ -1,8 +1,12 @@
-export interface Data {
-  gtmOnSuccess(): void;
-  gtmOnFailure(): void;
+declare global {
+  export interface Data {
+    gtmOnSuccess(): void;
+    gtmOnFailure(): void;
 
-  [key: string]: any;
+    [key: string]: any;
+  }
+
+  export declare const data: Data;
 }
 
-export declare const data: Data;
+export {};
