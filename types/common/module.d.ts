@@ -3,8 +3,6 @@
 /// Based on: https://developers.google.com/tag-platform/tag-manager/templates/api
 /////////////////////////////
 
-import "./utils";
-
 declare module "addConsentListener" {
   interface ConsentListener {
     /**
