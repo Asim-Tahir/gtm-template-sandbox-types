@@ -1,10 +1,6 @@
-export * from "./common/data";
-export * from "./common/require";
-export * from "./common/module";
-
-// import "./common/data";
-// import "./common/require";
-// import "./common/module";
+import "./common/data";
+import "./common/module";
+import "./common/require";
 
 export interface Subject {
   wasCalled(): boolean;
@@ -477,4 +473,3 @@ export declare function mockObject(apiName: string, objectMock: object): void;
  * ```
  */
 export declare function runCode(data: object): any | undefined;
-
