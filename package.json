@@ -1,7 +1,7 @@
 {
   "name": "gtm-template-sandbox-types",
   "version": "0.0.1-alpha.1",
-  "description": "Typescript types for Google Tag Manager sandbox javascript for web and test scenarios",
+  "description": "TypeScript types for Google Tag Manager(GTM) template sandboxed JS APIs both for template and testing",
   "type": "commonjs",
   "files": [
     "types"
