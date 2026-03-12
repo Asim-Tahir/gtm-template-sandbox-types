@@ -10,12 +10,64 @@ declare global {
     wasNotCalledWith(...expected: Array<any>): any;
   }
 
+  export type ApiName =
+    | "addConsentListener"
+    | "addEventCallback"
+    | "aliasInWindow"
+    | "callInWindow"
+    | "callLater"
+    | "copyFromDataLayer"
+    | "copyFromWindow"
+    | "createArgumentsQueue"
+    | "createQueue"
+    | "decodeUri"
+    | "decodeUriComponent"
+    | "encodeUri"
+    | "encodeUriComponent"
+    | "fromBase64"
+    | "generateRandom"
+    | "getContainerVersion"
+    | "getCookieValues"
+    | "getQueryParameters"
+    | "getReferrerQueryParameters"
+    | "getReferrerUrl"
+    | "getTimestamp"
+    | "getTimestampMillis"
+    | "getType"
+    | "getUrl"
+    | "gtagSet"
+    | "injectHiddenIframe"
+    | "injectScript"
+    | "isConsentGranted"
+    | "JSON"
+    | "localStorage"
+    | "logToConsole"
+    | "makeInteger"
+    | "makeNumber"
+    | "makeString"
+    | "makeTableMap"
+    | "Math"
+    | "Object"
+    | "parseUrl"
+    | "queryPermission"
+    | "readAnalyticsStorage"
+    | "readCharacterSet"
+    | "readTitle"
+    | "sendPixel"
+    | "setCookie"
+    | "setDefaultConsentState"
+    | "setInWindow"
+    | "sha256"
+    | "templateStorage"
+    | "toBase64"
+    | "updateConsentState";
+
   /**
    * Returns a matcher object that can be used to fluently make assertions about the given API.
    *
    * @param apiName The name of the api to check; same string as passed to {@link require `require()`}
    */
-  export declare function assertApi(apiName: string): Subject;
+  export declare function assertApi(apiName: ApiName): Subject;
 
   export declare interface Matchers<T = any> {
     /**
