@@ -27,6 +27,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+
       - name: Automated Version Bump
         uses: phips28/gh-action-bump-version@master
         env:
@@ -42,11 +47,6 @@ jobs:
           skip-tag: false
           skip-commit: false
           skip-push: false
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24.x"
 
       - name: Publish Pre-Release to NPM registry
         run: npm publish --tag prerelease
