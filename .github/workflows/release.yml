@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version type to bump"
+        required: true
+        type: choice
+        default: "patch"
+        options:
+          - patch
+          - minor
+          - major
+
+env:
+  HUSKY: 0
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+
+      - id: bump_version
+        name: Bump Version and Tag Release
+        uses: phips28/gh-action-bump-version@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          default: ${{ inputs.version_type }}
+          version-type: ${{ inputs.version_type }}
+          tag-prefix: "v"
+          target-branch: ${{ github.ref_name }}
+          commit-message: "chore: bump version to `{{version}}`"
+          bump-policy: "last-commit"
+          skip-tag: false
+          skip-commit: false
+          skip-push: false
+
+      - name: Publish latest version to NPM registry
+        run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump_version.outputs.new_tag }}
+          prerelease: false
+          draft: false
+          generate_release_notes: true
