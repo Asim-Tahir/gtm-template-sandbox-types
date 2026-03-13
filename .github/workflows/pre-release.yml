@@ -47,6 +47,11 @@ jobs:
         with:
           node-version: "24.x"
 
+      - name: Publish Pre-Release to NPM registry
+        run: npm publish --tag prerelease
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - id: bump_version
         name: Bump Version and Tag Pre-Release
         uses: phips28/gh-action-bump-version@master
@@ -63,11 +68,6 @@ jobs:
           skip-tag: ${{ inputs.skip_tag }}
           skip-commit: ${{ inputs.skip_commit }}
           skip-push: ${{ inputs.skip_push }}
-
-      - name: Publish Pre-Release to NPM registry
-        run: npm publish --tag prerelease
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Pre-Release
         uses: softprops/action-gh-release@v2
