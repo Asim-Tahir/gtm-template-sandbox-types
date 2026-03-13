@@ -59,4 +59,5 @@ jobs:
         with:
           tag_name: ${{ steps.bump_version.outputs.new_tag }}
           prerelease: true
-          body_path: ./CHANGELOG.md
+          draft: false
+          generate_release_notes: true
