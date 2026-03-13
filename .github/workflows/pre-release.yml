@@ -32,7 +32,8 @@ jobs:
         with:
           node-version: "24.x"
 
-      - name: Bump Version and Tag Pre-Release
+      - id: bump_version
+        name: Bump Version and Tag Pre-Release
         uses: phips28/gh-action-bump-version@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,5 +57,6 @@ jobs:
       - name: Publish Pre-Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.bump_version.outputs.new_tag }}
           prerelease: true
           body_path: ./CHANGELOG.md
