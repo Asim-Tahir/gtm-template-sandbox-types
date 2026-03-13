@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: "24.x"
 
-      - name: Automated Version Bump
+      - name: Bump Version and Tag Pre-Release
         uses: phips28/gh-action-bump-version@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
