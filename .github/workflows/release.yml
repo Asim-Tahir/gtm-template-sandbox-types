@@ -47,6 +47,11 @@ jobs:
         with:
           node-version: "24.x"
 
+      - name: Publish latest version to NPM registry
+        run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - id: bump_version
         name: Bump Version and Tag Release
         uses: phips28/gh-action-bump-version@master
@@ -62,11 +67,6 @@ jobs:
           skip-tag: ${{ inputs.skip_tag }}
           skip-commit: ${{ inputs.skip_commit }}
           skip-push: ${{ inputs.skip_push }}
-
-      - name: Publish latest version to NPM registry
-        run: npm publish --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
