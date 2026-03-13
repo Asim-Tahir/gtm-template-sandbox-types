@@ -12,6 +12,21 @@ on:
           - alpha
           - beta
           - rc
+      skip_tag:
+        description: "Avoid to add a TAG to the version update commit"
+        required: false
+        type: boolean
+        default: false
+      skip_commit:
+        description: "Avoid to add a commit after the version is bumped"
+        required: false
+        type: boolean
+        default: false
+      skip_push:
+        description: "If true, skip pushing any commits or tags created after the version bump"
+        required: false
+        type: boolean
+        default: false
 
 env:
   HUSKY: 0
@@ -45,9 +60,9 @@ jobs:
           target-branch: ${{ github.ref_name }}
           commit-message: "chore: bump version to `{{version}}`"
           bump-policy: "last-commit"
-          skip-tag: false
-          skip-commit: false
-          skip-push: false
+          skip-tag: ${{ inputs.skip_tag }}
+          skip-commit: ${{ inputs.skip_commit }}
+          skip-push: ${{ inputs.skip_push }}
 
       - name: Publish Pre-Release to NPM registry
         run: npm publish --tag prerelease
