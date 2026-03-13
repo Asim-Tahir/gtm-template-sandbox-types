@@ -59,7 +59,7 @@ jobs:
           tag-prefix: "v"
           target-branch: ${{ github.ref_name }}
           commit-message: "chore: bump version to `{{version}}`"
-          bump-policy: "last-commit"
+          bump-policy: "all"
           skip-tag: ${{ inputs.skip_tag }}
           skip-commit: ${{ inputs.skip_commit }}
           skip-push: ${{ inputs.skip_push }}
