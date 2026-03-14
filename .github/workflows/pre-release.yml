@@ -49,7 +49,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Publish Pre-Release to NPM registry
-        run: npm publish --tag prerelease
+        run: npm publish --tag prerelease --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
