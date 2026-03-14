@@ -27,6 +27,11 @@ on:
         required: false
         type: boolean
         default: false
+      generate_release_notes:
+        description: "Generate release notes for the GitHub Release"
+        required: false
+        type: boolean
+        default: true
 
 env:
   HUSKY: 0
@@ -77,4 +82,4 @@ jobs:
           tag_name: ${{ steps.bump_version.outputs.newTag }}
           prerelease: true
           draft: false
-          generate_release_notes: true
+          generate_release_notes: ${{ inputs.generate_release_notes }}
