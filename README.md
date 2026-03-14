@@ -32,6 +32,7 @@ bun add -D gtm-template-sandbox-types
     }
   ]
 }
+```
 
 ```jsonc
 // tsconfig.web.json
