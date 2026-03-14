@@ -50,7 +50,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Publish latest version to NPM registry
-        run: npm publish --tag latest --access public
+        run: npm publish --tag latest --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
