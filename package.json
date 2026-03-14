@@ -4,6 +4,10 @@
   "description": "TypeScript types for Google Tag Manager(GTM) template sandboxed JS APIs both for template and testing",
   "type": "commonjs",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Asim-Tahir/gtm-template-sandbox-types.git"
+  },
   "files": [
     "types"
   ],
