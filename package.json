@@ -8,6 +8,17 @@
     "type": "git",
     "url": "git+https://github.com/Asim-Tahir/gtm-template-sandbox-types.git"
   },
+  "keywords": [
+    "google-tag-manager-custom-template-types",
+    "google-tag-manager-custom-template",
+    "google-tag-manager-template-types",
+    "google-tag-manager",
+    "gtm-custom-template",
+    "gtm-template",
+    "gtm",
+    "typescript-types",
+    "typescript"
+  ],
   "files": [
     "types"
   ],
