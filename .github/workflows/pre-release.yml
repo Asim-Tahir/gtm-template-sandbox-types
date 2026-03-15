@@ -56,6 +56,9 @@ jobs:
           node-version: "24.x"
           registry-url: https://registry.npmjs.org/
 
+      - name: Generate SBOM
+        run: npm sbom --sbom-format spdx > sbom.spdx.json
+
       - id: bump_version
         name: Bump Version and Tag Pre-Release
         uses: phips28/gh-action-bump-version@master
