@@ -1,8 +1,16 @@
-# gtm-template-sandbox-types
+<h1 align="center">
+  GTM Template Sandbox Types
+</h1>
+
+[![Downloads][downloads-img]][npm-url]
+[![License][license-img]][license-url]
+[![Version][version-img]][npm-url]
 
 TypeScript types for Google Tag Manager(GTM) template's sandboxed JS APIs both for template and testing
 
 ## Installation
+
+[![npm install][npm-install-img]][npm-url]
 
 ```bash
 npm i -D gtm-template-sandbox-types
@@ -96,4 +104,11 @@ assertApi("gtmOnSuccess").wasCalled();
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License][license-url]
+
+[npm-url]: https://www.npmjs.com/package/gtm-template-sandbox-types
+[license-url]: https://github.com/Asim-Tahir/gtm-template-sandbox-types/blob/main/LICENSE
+[downloads-img]: https://img.shields.io/npm/dt/gtm-template-sandbox-types.svg
+[license-img]: https://img.shields.io/npm/l/gtm-template-sandbox-types.svg
+[version-img]: https://img.shields.io/npm/v/gtm-template-sandbox-types.svg?label=version
+[npm-install-img]: https://nodei.co/npm/gtm-template-sandbox-types.svg?style=compact
