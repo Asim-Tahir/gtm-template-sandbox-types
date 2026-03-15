@@ -59,6 +59,12 @@ jobs:
       - name: Generate SBOM
         run: npm sbom --sbom-format spdx > sbom.spdx.json
 
+      - name: GitHub Attestation
+        uses: actions/attest@v4
+        with:
+          subject-path: "${{ github.workspace }}"
+          sbom-path: "${{ github.workspace }}/sbom.spdx.json"
+
       - id: bump_version
         name: Bump Version and Tag Pre-Release
         uses: phips28/gh-action-bump-version@master
