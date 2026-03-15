@@ -94,7 +94,7 @@ jobs:
 
       - if: ${{ inputs.also_publish_latest == true }}
         name: Publish Pre-Release as Latest to NPM registry
-        run: npm publish --tag latest --provenance
+        run: npm dist-tag add gtm-template-sandbox-types@${{ steps.bump_version.outputs.newVersion }} latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
