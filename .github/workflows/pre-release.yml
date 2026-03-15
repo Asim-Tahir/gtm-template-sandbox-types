@@ -27,11 +27,6 @@ on:
         required: false
         type: boolean
         default: false
-      also_publish_latest:
-        description: "Also publish pre-release as latest on NPM registry"
-        required: false
-        type: boolean
-        default: false
       generate_release_notes:
         description: "Generate release notes for the GitHub Release"
         required: false
@@ -89,12 +84,6 @@ jobs:
 
       - name: Publish Pre-Release to NPM registry
         run: npm publish --tag prerelease --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - if: ${{ inputs.also_publish_latest == true }}
-        name: Publish Pre-Release as Latest to NPM registry
-        run: npm dist-tag add gtm-template-sandbox-types@${{ steps.bump_version.outputs.newVersion }} latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
