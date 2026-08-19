@@ -43,58 +43,26 @@ permissions:
   artifact-metadata: write
 
 jobs:
-  build-and-publish:
+  bump_version:
+    name: Bump Version
+    uses: ./.github/workflows/bump-version.yml
+    with:
+      version_type: ${{ inputs.version_type }}
+      skip_tag: ${{ inputs.skip_tag }}
+      skip_commit: ${{ inputs.skip_commit }}
+      skip_push: ${{ inputs.skip_push }}
+  build_and_publish:
     runs-on: ubuntu-24.04
+    needs: bump_version
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Configure Git Identity
-        if: ${{ !inputs.skip_commit }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3"
-
-      - name: Current Version
-        id: current_version
-        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
-
-      - name: Bump Version
-        id: bump_version
-        run: |
-          bun pm version "${{ inputs.version_type }}" \
-            --no-git-tag-version
-
-      - name: New Version
-        id: new_version
-        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
-
-      - name: Finalize Version Bump
-        run: |
-          if [ "${{ inputs.skip_commit }}" != "true" ]; then
-            git add package.json
-            git commit -m "ci: bump version to \`${{ steps.new_version.outputs.version }}\`" || echo "No version files to commit"
-          fi
-
-          if [ "${{ inputs.skip_tag }}" != "true" ]; then
-            TAG="v${{ steps.new_version.outputs.version }}"
-            git rev-parse "$TAG" >/dev/null 2>&1 || git tag "$TAG"
-          fi
-
-          if [ "${{ inputs.skip_push }}" != "true" ]; then
-            git push origin HEAD:${{ github.ref_name }}
-
-            if [ "${{ inputs.skip_tag }}" != "true" ]; then
-              git push origin "v${{ steps.new_version.outputs.version }}"
-            fi
-          fi
-
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
@@ -113,9 +81,9 @@ jobs:
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PREV_VERSION: ${{ steps.current_version.outputs.version }}
-          NEW_VERSION: ${{ steps.new_version.outputs.version }}
-          TAG: "v${{ steps.new_version.outputs.version }}"
+          PREV_VERSION: ${{ needs.bump_version.outputs.current_version }}
+          NEW_VERSION: ${{ needs.bump_version.outputs.new_version }}
+          TAG: "v${{ needs.bump_version.outputs.new_version }}"
           REPO_URL: "https://github.com/${{ github.repository }}"
         run: |
           awk -v ver="$NEW_VERSION" '

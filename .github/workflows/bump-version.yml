@@ -1,0 +1,139 @@
+name: Bump Version
+
+on:
+  workflow_call:
+    inputs:
+      version_type:
+        type: string
+        required: true
+        description: "Version type to bump\n\n\"patch\":      `0.0.1` → `0.0.2`\n\n\"minor\":      `0.0.1` → `0.1.0`\n\n\"major\":      `0.0.1` → `1.0.0`\n\n\"prerelease\": `0.0.1-alpha.11` → `0.0.1-alpha.12`\n\n\"prepatch\":   `0.0.1-alpha.11` → `0.0.2-alpha.0`\n\n\"preminor\":   `0.0.1-alpha.11` → `0.1.0-alpha.0`\n\n\"premajor\":   `0.0.1-alpha.11` → `1.0.0-alpha.0`"
+      pre_id:
+        description: "Pre-release identifier"
+        default: ""
+        required: false
+        type: string
+      skip_tag:
+        description: "Skip adding git tag to the version bump commit"
+        required: false
+        type: boolean
+        default: false
+      skip_commit:
+        description: "Skip committing the version bump"
+        required: false
+        type: boolean
+        default: false
+      skip_push:
+        description: "Skip pushing any commits or tags created after the version bump"
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      current_version:
+        description: "Version before the bump"
+        value: ${{ jobs.bump_version.outputs.current_version }}
+      new_version:
+        description: "Version after the bump"
+        value: ${{ jobs.bump_version.outputs.new_version }}
+
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version type to bump\n\n\"patch\":      `0.0.1` → `0.0.2`\n\n\"minor\":      `0.0.1` → `0.1.0`\n\n\"major\":      `0.0.1` → `1.0.0`\n\n\"prerelease\": `0.0.1-alpha.11` → `0.0.1-alpha.12`\n\n\"prepatch\":   `0.0.1-alpha.11` → `0.0.2-alpha.0`\n\n\"preminor\":   `0.0.1-alpha.11` → `0.1.0-alpha.0`\n\n\"premajor\":   `0.0.1-alpha.11` → `1.0.0-alpha.0`"
+        required: true
+        type: choice
+        default: "prerelease"
+        options:
+          - patch # 0.0.1 → 0.0.2
+          - minor # 0.0.1 → 0.1.0
+          - major # 0.0.1 → 1.0.0
+          - prerelease # 0.0.1-alpha.11 → 0.0.1-alpha.12
+          - prepatch # 0.0.1-alpha.11 → 0.0.2-alpha.0
+          - preminor # 0.0.1-alpha.11 → 0.1.0-alpha.0
+          - premajor # 0.0.1-alpha.11 → 1.0.0-alpha.0
+      pre_id:
+        description: "Pre-release identifier"
+        required: true
+        type: choice
+        default: ""
+        options:
+          - alpha
+          - beta
+          - rc
+      skip_tag:
+        description: "Skip adding git tag to the version bump commit"
+        required: false
+        type: boolean
+        default: false
+      skip_commit:
+        description: "Skip committing the version bump"
+        required: false
+        type: boolean
+        default: false
+      skip_push:
+        description: "Skip pushing any commits or tags created after the version bump"
+        required: false
+        type: boolean
+        default: false
+env:
+  HUSKY: 0
+
+permissions:
+  contents: write
+
+jobs:
+  bump_version:
+    name: Bump Version
+    runs-on: ubuntu-24.04
+    outputs:
+      current_version: ${{ steps.current_version.outputs.version }}
+      new_version: ${{ steps.new_version.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Configure Git Identity
+        if: ${{ !inputs.skip_commit }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3"
+
+      - name: Current Version
+        id: current_version
+        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
+
+      - name: Bump Version
+        id: bump_version
+        run: |
+          bun pm version "${{ inputs.version_type }}" \
+            --no-git-tag-version \
+            ${{ inputs.pre_id != '' && format('--preid={0}', inputs.pre_id) || '' }}
+
+      - name: New Version
+        id: new_version
+        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
+
+      - name: Finalize Version Bump
+        run: |
+          if [ "${{ inputs.skip_commit }}" != "true" ]; then
+            git add package.json
+            git commit -m "ci: bump version to \`${{ steps.new_version.outputs.version }}\`" || echo "No version files to commit"
+          fi
+
+          if [ "${{ inputs.skip_tag }}" != "true" ]; then
+            TAG="v${{ steps.new_version.outputs.version }}"
+            git rev-parse "$TAG" >/dev/null 2>&1 || git tag "$TAG"
+          fi
+
+          if [ "${{ inputs.skip_push }}" != "true" ]; then
+            git push origin HEAD:${{ github.ref_name }}
+
+            if [ "${{ inputs.skip_tag }}" != "true" ]; then
+              git push origin "v${{ steps.new_version.outputs.version }}"
+            fi
+          fi
