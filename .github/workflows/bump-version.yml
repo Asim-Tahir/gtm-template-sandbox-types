@@ -82,7 +82,6 @@ permissions:
 
 jobs:
   bump_version:
-    name: Bump Version
     runs-on: ubuntu-24.04
     outputs:
       current_version: ${{ steps.current_version.outputs.version }}
