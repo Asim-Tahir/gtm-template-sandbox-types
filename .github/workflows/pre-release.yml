@@ -137,7 +137,7 @@ jobs:
             release_args=(--notes "$TAG")
           fi
 
-          gh release create "$TAG" --verify-tag "${release_args[@]}"
+          gh release create "$TAG" "${release_args[@]}"
 
       - name: Setup authentication for GitHub Packages registry
         run: |
