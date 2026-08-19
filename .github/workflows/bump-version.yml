@@ -104,7 +104,7 @@ jobs:
 
       - name: Current Version
         id: current_version
-        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(bun pm pkg get version | tr -d '\"')" >> "$GITHUB_OUTPUT"
 
       - name: Bump Version
         id: bump_version
@@ -115,7 +115,7 @@ jobs:
 
       - name: New Version
         id: new_version
-        run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(bun pm pkg get version | tr -d '\"')" >> "$GITHUB_OUTPUT"
 
       - name: Finalize Version Bump
         run: |
