@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       version_type:
-        description: "Version type to bump"
+        description: "Version type to bump\n\npatch      0.0.1 → 0.0.2\nminor      0.0.1 → 0.1.0\nmajor      0.0.1 → 1.0.0"
         required: true
         type: choice
         default: "patch"
         options:
-          - patch
-          - minor
-          - major
+          - patch # 0.0.1 → 0.0.2
+          - minor # 0.0.1 → 0.1.0
+          - major # 0.0.1 → 1.0.0
       skip_tag:
         description: "Skip adding git tag to the version bump commit"
         required: false
