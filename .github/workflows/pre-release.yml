@@ -4,14 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       version_type:
-        description: "Version type to bump"
+        description: "Version type to bump\n\nprerelease 0.0.1-alpha.11 → 0.0.1-alpha.12\nprepatch   0.0.1-alpha.11 → 0.0.2-alpha.0\npreminor   0.0.1-alpha.11 → 0.1.0-alpha.0\npremajor   0.0.1-alpha.11 → 1.0.0-alpha.0"
         required: true
         type: choice
-        default: "patch"
+        default: "prerelease"
         options:
-          - patch
-          - minor
-          - major
+          - prerelease # 0.0.1-alpha.11 → 0.0.1-alpha.12
+          - prepatch # 0.0.1-alpha.11 → 0.0.2-alpha.0
+          - preminor # 0.0.1-alpha.11 → 0.1.0-alpha.0
+          - premajor # 0.0.1-alpha.11 → 1.0.0-alpha.0
       pre_id:
         description: "Pre-release identifier"
         required: true
