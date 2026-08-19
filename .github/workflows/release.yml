@@ -127,17 +127,8 @@ jobs:
 
           gh release create "$TAG" --verify-tag "${release_args[@]}"
 
-      - name: Setup authentication for GitHub Packages registry
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Publish to GitHub Packages
-        run: npm publish --registry https://npm.pkg.github.com --access public --tag latest --provenance
 
       - name: Publish to NPM
         run: npm publish --registry https://registry.npmjs.org --access public --tag latest --provenance
