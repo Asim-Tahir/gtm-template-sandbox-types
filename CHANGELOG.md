@@ -2,8 +2,80 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- ...
+
+### Changed
+
+- ...
+
+### Deprecated
+
+- ...
+
+### Removed
+
+- ...
+
+### Fixed
+
+- ...
+
+### Security
+
+- ...
+
+## [0.0.1-alpha.12] - 2026-08-19
+
+No user-facing changes.
+
+## [0.0.1-alpha.11] - 2026-03-15
+
+No user-facing changes.
+
+## [0.0.1-alpha.10] - 2026-03-15
+
+No user-facing changes.
+
+## [0.0.1-alpha.9] - 2026-03-15
+
+No user-facing changes.
+
+## [0.0.1-alpha.8] - 2026-03-15
+
+No user-facing changes.
+
+## [0.0.1-alpha.7] - 2026-03-15
+
+No user-facing changes.
+
+## [0.0.1-alpha.6] - 2026-03-15
+
+### Fixed
+
+- Package repository metadata now uses a valid Git URL.
+
+### Security
+
+- Published packages now include a software bill of materials and GitHub attestations.
+
+## [0.0.1-alpha.5] - 2026-03-14
+
+No user-facing changes.
+
+## [0.0.1-alpha.4] - 2026-03-14
+
+No user-facing changes.
+
+## [0.0.1-alpha.3] - 2026-03-14
+
+No user-facing changes.
 
 ## [0.0.1-alpha.2] - 2026-02-12
 
