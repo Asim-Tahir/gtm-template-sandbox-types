@@ -60,6 +60,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Configure Git Identity
+        if: ${{ !inputs.skip_commit }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -68,12 +74,6 @@ jobs:
       - name: Current Version
         id: current_version
         run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
-
-      - name: Configure Git Identity
-        if: ${{ !inputs.skip_commit }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Bump Version
         id: bump_version
