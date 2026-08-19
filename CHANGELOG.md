@@ -31,29 +31,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ...
 
+## [0.0.1-alpha.16] - 2026-08-19
+
+### Removed
+
+- Release workflows no longer publish packages to GitHub Packages.
+
 ## [0.0.1-alpha.15] - 2026-08-19
 
-No user-facing changes.
+### Fixed
+
+- The version bump workflow now passes version environment variables without stray quotation marks.
 
 ## [0.0.1-alpha.14] - 2026-08-19
 
-No user-facing changes.
+### Fixed
+
+- Release workflows now pass correctly formatted tags when creating releases.
 
 ## [0.0.1-alpha.13] - 2026-08-19
 
-No user-facing changes.
+### Changed
+
+- Release workflows now create releases with corrected tag formatting and tag verification.
+
+- Release publishing jobs now reuse the existing build output instead of rebuilding packages.
 
 ## [0.0.1-alpha.12] - 2026-08-19
 
-No user-facing changes.
+### Changed
+
+- Release workflows now support selecting the version increment for releases and pre-releases.
+
+- Release workflows now use Bun `1.3` and built-in tooling for version bumping and release note generation.
 
 ## [0.0.1-alpha.11] - 2026-03-15
 
-No user-facing changes.
+### Added
+
+- Add badges to the README to indicate the downloads count, latest version, and license.
 
 ## [0.0.1-alpha.10] - 2026-03-15
 
-No user-facing changes.
+### Added
+
+- Package metadata now includes keywords to improve npm discoverability.
 
 ## [0.0.1-alpha.9] - 2026-03-15
 
