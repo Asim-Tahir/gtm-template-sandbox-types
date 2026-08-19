@@ -84,7 +84,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREV_VERSION: ${{ needs.bump_version.outputs.current_version }}
           NEW_VERSION: ${{ needs.bump_version.outputs.new_version }}
-          TAG: "v${{ needs.bump_version.outputs.new_version }}"
+          TAG: 'v${{ needs.bump_version.outputs.new_version }}'
           REPO_URL: "https://github.com/${{ github.repository }}"
         run: |
           awk -v ver="$NEW_VERSION" '
