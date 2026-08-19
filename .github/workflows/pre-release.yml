@@ -63,8 +63,8 @@ jobs:
       skip_commit: ${{ inputs.skip_commit }}
       skip_push: ${{ inputs.skip_push }}
         
-  build_and_prepublish:
-    name: Build and Prepublish
+  prepublish:
+    name: Prepublish
     needs: bump_version
     runs-on: ubuntu-24.04
 
@@ -147,9 +147,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Build the library
-        run: bun run build
 
       - name: Publish to GitHub Packages
         run: npm publish --registry https://npm.pkg.github.com --access public --tag latest --provenance
