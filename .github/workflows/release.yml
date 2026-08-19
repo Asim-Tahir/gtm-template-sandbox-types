@@ -69,26 +69,11 @@ jobs:
         id: bump_version
         run: |
           bun pm version "${{ inputs.version_type }}" \
-            --no-git-tag-version \
-            --message="ci: bump version to \`%s\`"
+            --no-git-tag-version
 
       - name: New Version
         id: new_version
         run: echo "version=$(bun pm pkg get version)" >> "$GITHUB_OUTPUT"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: "24.x"
-
-      - name: Generate SBOM
-        run: npm sbom --sbom-format spdx > sbom.spdx.json
-
-      - name: GitHub Attestation
-        uses: actions/attest@v4
-        with:
-          subject-path: "${{ github.workspace }}"
-          sbom-path: "${{ github.workspace }}/sbom.spdx.json"
 
       - name: Finalize Version Bump
         run: |
@@ -109,6 +94,21 @@ jobs:
               git push origin "v${{ steps.new_version.outputs.version }}"
             fi
           fi
+
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24.x"
+
+      - name: Generate SBOM
+        run: npm sbom --sbom-format spdx > sbom.spdx.json
+
+      - name: GitHub Attestation
+        uses: actions/attest@v4
+        with:
+          subject-path: "${{ github.workspace }}"
+          sbom-path: "${{ github.workspace }}/sbom.spdx.json"
 
       - name: Create GitHub Release
         env:
