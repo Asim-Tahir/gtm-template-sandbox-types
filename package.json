@@ -1,12 +1,13 @@
 {
-  "name": "gtm-template-sandbox-types",
+  "name": "@gtm-template/types",
   "version": "0.0.1-alpha.16",
-  "description": "TypeScript types for Google Tag Manager(GTM) template sandboxed JS APIs both for template and testing",
+  "description": "TypeScript types for Google Tag Manager(GTM) template JS APIs both for web and testing",
   "type": "commonjs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Asim-Tahir/gtm-template-sandbox-types.git"
+    "url": "git+https://github.com/gtm-template/gtm-template.git",
+    "directory": "packages/types"
   },
   "keywords": [
     "google-tag-manager-custom-template-types",
